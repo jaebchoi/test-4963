@@ -7,4 +7,5 @@ dependencies:
     version: 1.11.0-SNAPSHOT
     repository: oci://ghcr.io/boozallen
     import-values:
-      - configMap.configStore
+      - child: configMap.configStore
+        parent: configMap.configStore

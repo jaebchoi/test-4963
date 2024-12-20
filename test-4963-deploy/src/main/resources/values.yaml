@@ -15,3 +15,6 @@ spec:
 global:
   imagePullPolicy: Always
   dockerRepo: ghcr.io/
+
+configMap:
+  configStore: disabled
