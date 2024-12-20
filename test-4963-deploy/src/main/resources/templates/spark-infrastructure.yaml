@@ -6,7 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  {{ if eq .Values.configMap.configStore "enabled" }}
+  {{ if eq .Values.global.configMap.configStore "enabled" }}
   ignoreDifferences:
     - group: ""
       kind: ConfigMap
