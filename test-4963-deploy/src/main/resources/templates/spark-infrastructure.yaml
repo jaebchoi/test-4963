@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: spark-infrastructure
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  {{ if eq .Values.configMap.configStore "enabled" }}
+  ignoreDifferences:
+    - group: ""
+      kind: ConfigMap
+      managedFieldsManagers:
+        - argocd-controller
+    - group: apps
+      kind: StatefulSet
+      managedFieldsManagers:
+        - argocd-controller
+  {{ end }}
+  destination:
+    namespace: test-4963
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    repoURL: {{ .Values.spec.repo }}
+    path: test-4963-deploy/src/main/resources/apps/spark-infrastructure
+    targetRevision: {{ .Values.spec.targetRevision }}
+    {{ if .Values.spec.helm.valueFiles }}
+    helm:
+      valueFiles:
+        {{- range .Values.spec.helm.valueFiles }}
+        - {{ . }}
+        {{- end }}    
+    {{ end }}
+  {{- with .Values.spec.syncPolicy }}
+  syncPolicy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
