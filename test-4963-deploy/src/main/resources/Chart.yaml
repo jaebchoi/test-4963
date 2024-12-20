@@ -4,7 +4,7 @@ version: 0.1.0
 appVersion: "1.0.0"
 dependencies:
   - name: aissemble-hive-metastore-service-chart
-    version: ${versionTag}
+    version: 1.11.0-SNAPSHOT
     repository: oci://ghcr.io/boozallen
     import-values:
       - configStore
