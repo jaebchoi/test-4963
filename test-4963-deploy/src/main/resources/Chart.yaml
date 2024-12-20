@@ -8,4 +8,4 @@ dependencies:
     repository: oci://ghcr.io/boozallen
     import-values:
       - child: configMap.configStore
-        parent: configStore
+        parent: configMap.configStore
